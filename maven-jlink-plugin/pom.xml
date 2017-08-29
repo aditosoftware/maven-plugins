@@ -53,11 +53,19 @@
     <system>jira</system>
     <url>https://issues.apache.org/jira/browse/MJLINK</url>
   </issueManagement>
+
   <distributionManagement>
-    <site>
-      <id>apache.website</id>
-      <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/maven/components/${maven.site.path}</url>
-    </site>
+    <repository>
+      <id>adito.m2</id>
+      <name>releases</name>
+      <url>${repository.releases}</url>
+    </repository>
+    <snapshotRepository>
+      <id>adito.m2</id>
+      <name>snapshots</name>
+      <url>${repository.snapshots}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
   </distributionManagement>
 
   <properties>

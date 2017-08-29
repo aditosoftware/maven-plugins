@@ -109,7 +109,7 @@ public class JLinkMojo
      * <code>-c, --compress=&lt;0|1|2&gt;</code> Enabled compression of resources.
      */
     @Parameter
-    private Integer compression;
+    private Integer compress;
 
     /**
      * Limit the universe of observable modules. <code>--limit-modules &lt;mod&gt;[,&lt;mod&gt;...]</code>
@@ -241,10 +241,6 @@ public class JLinkMojo
         List<Dependency> dependencies = getSession().getCurrentProject().getDependencies();
 
         List<MavenProject> modulesToAdd = new ArrayList<>();
-        if ( dependencies.isEmpty() )
-        {
-            
-        }
         getLog().info( "The following dependencies will be linked into the runtime image:" );
         for ( Dependency dependency : dependencies )
         {
@@ -398,10 +394,10 @@ public class JLinkMojo
     private void failIfParametersAreNotInTheirValidValueRanges()
         throws MojoFailureException
     {
-        if ( compression != null && ( compression < 0 || compression > 2 ) )
+        if ( compress != null && ( compress < 0 || compress > 2 ) )
         {
             String message =
-                "The given compression parameters " + compression + " is not in the valid value range from 0..2";
+                "The given compression parameters " + compress + " is not in the valid value range from 0..2";
             getLog().error( message );
             throw new MojoFailureException( message );
         }
@@ -467,10 +463,10 @@ public class JLinkMojo
         {
             argsFile.println( "--ignore-signing-information" );
         }
-        if ( compression != null )
+        if ( compress != null )
         {
-            argsFile.println( "--compression" );
-            argsFile.println( compression );
+            argsFile.println( "--compress" );
+            argsFile.println( compress );
         }
 
         if ( disablePlugin != null )
